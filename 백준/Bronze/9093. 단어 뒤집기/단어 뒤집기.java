@@ -1,31 +1,27 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
 
 public class Main {
 
-    public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
     public static void main(String[] args) throws IOException {
 
-        int T = 0;
-        String input = "";
-        T = Integer.parseInt(br.readLine());
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        for (int i = 0; i < T; i++) {
-            input = br.readLine();
-            String[] split = input.split(" ");
+        int n = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < n; i++) {
+            String[] arr = br.readLine().split(" ");
             StringBuilder sb = new StringBuilder();
 
-            for (String s : split) {
-                StringBuilder reverse = new StringBuilder(s);
-                sb.append(reverse.reverse());
-                sb.append(' ');
+            for (String s : arr) {
+                StringBuilder result = new StringBuilder(s);
+                sb.append(result.reverse());
+                sb.append(" ");
             }
-
-            sb.deleteCharAt(sb.length() - 1);
             System.out.println(sb);
         }
+
+        br.close();
     }
 }
