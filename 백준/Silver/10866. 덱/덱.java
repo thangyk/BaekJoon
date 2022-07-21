@@ -49,7 +49,7 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         Deque deque = new LinkedList();
-//        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
 
         for (int i = 0; i < n; i++) {
@@ -63,25 +63,27 @@ public class Main {
                     deque.addLast(Integer.parseInt(st.nextToken()));
                     break;
                 case "pop_front":
-                    bw.write(popFront(deque) + "\n");
+                    sb.append(popFront(deque) + "\n");
                     break;
                 case "pop_back":
-                    bw.write(popBack(deque) + "\n");
+                    sb.append(popBack(deque) + "\n");
                     break;
                 case "size":
-                    bw.write(deque.size() + "\n");
+                    sb.append(deque.size() + "\n");
                     break;
                 case "empty":
-                    bw.write(isEmpty(deque) + "\n");
+                    sb.append(isEmpty(deque) + "\n");
                     break;
                 case "front":
-                    bw.write(front(deque) + "\n");
+                    sb.append(front(deque) + "\n");
                     break;
                 case "back":
-                    bw.write(back(deque) + "\n");
+                    sb.append(back(deque) + "\n");
                     break;
             }
         }
+
+        System.out.println(sb);
 
         bw.flush();
         br.close();
