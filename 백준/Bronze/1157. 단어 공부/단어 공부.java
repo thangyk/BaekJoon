@@ -13,7 +13,7 @@ public class Main {
         sb.append(input);
 
         for (int i = 0; i < sb.length(); i++) {
-            int num = sb.charAt(i) - 65;
+            int num = sb.charAt(i) - 'A';
             alphabet[num]++;
         }
 
