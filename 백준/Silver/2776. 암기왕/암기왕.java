@@ -1,6 +1,6 @@
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -10,6 +10,7 @@ public class Main {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringBuilder sb = new StringBuilder();
 
         int T = Integer.parseInt(br.readLine());
 
@@ -17,27 +18,29 @@ public class Main {
         int note2;
 
         for (int i = 0; i < T; i++) {
-            Map<Integer, Integer> map = new HashMap();
-
             int n = Integer.parseInt(br.readLine());
             StringTokenizer st = new StringTokenizer(br.readLine());
+
+            Set<Integer> set = new HashSet<>();
             for (int j = 0; j < n; j++) {
                 note1 = Integer.parseInt(st.nextToken());
-                map.put(note1, note1);
+                set.add(note1);
             }
 
             int m = Integer.parseInt(br.readLine());
             st = new StringTokenizer(br.readLine());
             for (int j = 0; j < m; j++) {
                 note2 = Integer.parseInt(st.nextToken());
-                if (map.containsKey(note2)) {
-                    bw.write("1\n");
+                if (set.contains(note2)) {
+                    sb.append("1\n");
                 } else {
-                    bw.write("0\n");
+                    sb.append("0\n");
                 }
             }
 
         }
+
+        bw.write(sb.toString());
 
         bw.flush();
         bw.close();
