@@ -32,15 +32,13 @@ public class Main {
             for (int j = 0; j < m; j++) {
                 note2 = Integer.parseInt(st.nextToken());
                 if (set.contains(note2)) {
-                    sb.append("1\n");
+                    bw.write("1\n");
                 } else {
-                    sb.append("0\n");
+                    bw.write("0\n");
                 }
             }
 
         }
-
-        bw.write(sb.toString());
 
         bw.flush();
         bw.close();
