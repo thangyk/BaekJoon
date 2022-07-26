@@ -19,7 +19,11 @@ public class Main {
         for (int i = 0; i < n; i++) {
             long cardNum = Long.parseLong(br.readLine());
 
-            map.put(cardNum, map.getOrDefault(cardNum, 0) + 1);
+            if (map.containsKey(cardNum)) {
+                map.put(cardNum, map.get(cardNum) + 1);
+            } else {
+                map.put(cardNum, 1);
+            }
 
             if (map.get(cardNum) > max) {
                 max = map.get(cardNum);
