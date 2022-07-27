@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
@@ -8,6 +9,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
         StringTokenizer st;
 
         st = new StringTokenizer(br.readLine());
@@ -38,11 +40,11 @@ public class Main {
         while (it.hasNext()) {
             Integer element = it.next();
             for (int i = 0; i < map.get(element); i++) {
-                System.out.print(element + " ");
+                sb.append(element + " ");
             }
 
         }
-
+        System.out.println(sb);
 
         br.close();
     }
