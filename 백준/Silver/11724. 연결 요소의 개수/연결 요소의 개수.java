@@ -1,16 +1,18 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class Main {
 
+    static BufferedReader br;
+    static BufferedWriter bw;
     static boolean[] visited;
     static ArrayList<Integer>[] adjList;
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        br = new BufferedReader(new InputStreamReader(System.in));
+        bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
@@ -25,6 +27,7 @@ public class Main {
 
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
+
             int from = Integer.parseInt(st.nextToken());
             int to = Integer.parseInt(st.nextToken());
 
@@ -40,14 +43,18 @@ public class Main {
             }
         }
 
-        System.out.println(cnt);
+        bw.write(String.valueOf(cnt));
 
+        bw.flush();
+        br.close();
+        bw.close();
     }
 
     private static void dfs(int v) {
         if (visited[v]) {
             return;
         }
+
         visited[v] = true;
         for (int i : adjList[v]) {
             if (!visited[i]) {
@@ -55,4 +62,6 @@ public class Main {
             }
         }
     }
+
+
 }
