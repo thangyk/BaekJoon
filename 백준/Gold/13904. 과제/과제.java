@@ -15,9 +15,10 @@ class forTask {
 }
 
 public class Main {
-
     static int n, result, maxDay;
     static PriorityQueue<forTask> pq;
+
+    static boolean[] visited;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -40,26 +41,19 @@ public class Main {
             pq.add(new forTask(deadLine, point));
         }
 
-        int[] day = new int[maxDay+1];
+        visited = new boolean[1001];
         while (!pq.isEmpty()) {
             forTask task = pq.poll();
             for (int i = task.deadLine; i > 0; i--) {
-                if (day[i] == 0) {
-                    day[i] = task.point;
+                if (visited[i] == false) {
+                    visited[i] = true;
+                    result += task.point;
                     break;
                 }
             }
         }
 
-        for (int i = 1; i < day.length; i++) {
-            result += day[i];
-        }
         System.out.println(result);
-
-//        while (!pq.isEmpty()) {
-//            forTask task = pq.poll();
-//            System.out.println(task.deadLine + " " + task.point);
-//        }
 
         br.close();
     }
