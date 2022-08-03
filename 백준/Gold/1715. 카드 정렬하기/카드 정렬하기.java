@@ -18,7 +18,7 @@ public class Main {
         }
 
         int ans = 0;
-        if (n > 2) {
+        if (n > 1) {
             while (!pq.isEmpty()) {
                 int set1 = pq.poll();
                 int set2 = pq.poll();
@@ -31,13 +31,7 @@ public class Main {
                 pq.add(newSet);
             }
         } else {
-            if (n == 1) {
-                ans = 0;
-            } else {
-                int set1 = pq.poll();
-                int set2 = pq.poll();
-                ans = set1 + set2;
-            }
+            ans = 0;
         }
 
         System.out.println(ans);
