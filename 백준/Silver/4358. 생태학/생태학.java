@@ -1,19 +1,18 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
+
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    static StringBuilder sb = new StringBuilder();
+    static Map<String, Integer> map = new HashMap<>();
+    static double cnt;
+
     public static void main(String[] args) throws IOException {
 
-        Map<String, Integer> map = new HashMap<>();
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
-
-        double cnt = 0;
         while (true) {
             String type = br.readLine();
             if (type == null || type.equals("")) {
@@ -28,11 +27,14 @@ public class Main {
 
         for (int i = 0; i < tree.length; i++) {
             sb.append(tree[i] + " ");
-            sb.append(String.format("%.4f", (map.get(tree[i])/cnt)*100)+"\n");
+            sb.append(String.format("%.4f", (map.get(tree[i]) / cnt) * 100) + "\n");
         }
 
-        System.out.println(sb);
+        bw.write(sb.toString());
 
+        bw.flush();
+        bw.close();
+        br.close();
 
     }
 }
