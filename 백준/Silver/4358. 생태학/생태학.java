@@ -22,8 +22,11 @@ public class Main {
         }
 
         for (Map.Entry<String, Double> item : map.entrySet()) {
-            System.out.printf("%s %.4f\n", item.getKey(),(item.getValue()/cnt)*100);
+            sb.append(item.getKey() + " ");
+            sb.append(String.format("%.4f", (item.getValue()/cnt)*100)+"\n");
         }
+
+        System.out.println(sb);
 
 
     }
