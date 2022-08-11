@@ -1,59 +1,46 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
 
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static StringTokenizer st;
 
     public static void main(String[] args) throws IOException {
 
-        st = new StringTokenizer(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int N = Integer.parseInt(st.nextToken());   // 나무의 수
-        int M = Integer.parseInt(st.nextToken());   // 나무의 길이
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
 
-        // 나무 배열
+        int left = 0;
+        int right = 0;
+
         int[] trees = new int[N];
-
-        int min = 0;
-        int max = 0;
-
-        //나무의 높이 입력
         st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < trees.length; i++) {
             trees[i] = Integer.parseInt(st.nextToken());
-
-            if (max < trees[i]) {
-                max = trees[i];
-            }
+            right = Math.max(right, trees[i]);
         }
 
-        // 배열의 가운데 인덱스 기준
-
-        while (min < max) {
-            int H = (min + max) / 2;
+        while (left <= right) {
+            int mid = left + (right - left) / 2; // 절단기 높이
             long sum = 0;
 
             for (int tree : trees) {
-                if (tree > H) {
-                    sum += tree - H;
+                if (tree > mid) {
+                    sum += tree - mid;
                 }
             }
 
             if (sum < M) {
-                max = H;
+                right = mid - 1;
             } else {
-                min = H + 1;
+                left = mid + 1;
             }
         }
-
-        System.out.println(min - 1);
-
+        System.out.println(left-1);
         br.close();
-
     }
 }
