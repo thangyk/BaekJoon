@@ -1,6 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -14,26 +12,44 @@ public class Main {
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
 
-        ArrayList<Integer> list = new ArrayList<>();
+        int[] A = new int[N];
+        int[] B = new int[M];
+        int[] result = new int[N + M];
 
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
-            list.add(Integer.parseInt(st.nextToken()));
+            A[i] = Integer.parseInt(st.nextToken());
         }
 
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < M; i++) {
-            list.add(Integer.parseInt(st.nextToken()));
+            B[i] = Integer.parseInt(st.nextToken());
         }
 
-        Collections.sort(list);
-
-//        StringBuilder sb = new StringBuilder();
-        for (int i : list) {
-            bw.write(String.valueOf(i) + " ");
+        int idx = 0;
+        int p1 = 0;
+        int p2 = 0;
+        while (p1 < N && p2 < M) {
+            if (A[p1] < B[p2]) {
+                result[idx++] = A[p1++];
+            } else {
+                result[idx++] = B[p2++];
+            }
         }
 
-//        System.out.println(sb);
+        while (p1 < N) {
+            result[idx++] = A[p1++];
+        }
+
+        while (p2 < M) {
+            result[idx++] = B[p2++];
+        }
+
+        for (int i : result) {
+            bw.write(String.valueOf(i));
+            bw.write(" ");
+        }
+
         bw.flush();
         bw.close();
         br.close();
