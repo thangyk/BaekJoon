@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.StringTokenizer;
@@ -8,6 +6,7 @@ import java.util.StringTokenizer;
 public class Main {
 
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
     public static void main(String[] args) throws IOException {
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -29,12 +28,14 @@ public class Main {
 
         Collections.sort(list);
 
-        StringBuilder sb = new StringBuilder();
+//        StringBuilder sb = new StringBuilder();
         for (int i : list) {
-            sb.append(i + " ");
+            bw.write(String.valueOf(i) + " ");
         }
 
-        System.out.println(sb);
+//        System.out.println(sb);
+        bw.flush();
+        bw.close();
         br.close();
     }
 }
