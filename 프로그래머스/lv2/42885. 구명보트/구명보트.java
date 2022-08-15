@@ -1,22 +1,23 @@
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Deque;
 
 class Solution {
     public int solution(int[] people, int limit) {
         int answer = 0;
 
-        // 구명보트는 최대 2명만 탈 수 있다. ( + 무게제한도 있음 )
-        // 모든 사람을 구출하려면 구명보트는 몇번 사용해야 하는가
-
-        // 1 <= people.length <= 50000
-        // 40 <= people[i] <= 240
-        // 40 <= limit <= 240
-
         Arrays.sort(people);
+        Deque<Integer> dq = new ArrayDeque<>();
+        for (int i = 0; i < people.length; i++) {
+            dq.offer(people[i]);
+        }
 
-        int left = 0;
-        for (int right = people.length - 1; left <= right; right--) {
-            if (people[left] + people[right] <= limit) {
-                left++;
+        while (!dq.isEmpty()) {
+            int data = dq.pollLast();
+            if (!dq.isEmpty()) {
+                if (dq.peekFirst() + data <= limit) {
+                    dq.pollFirst();
+                }
             }
             answer++;
         }
