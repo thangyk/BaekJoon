@@ -1,61 +1,46 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static int[][] arr;
-    static int white, blue = 0;
-
-    public static boolean checkColor(int[][] arr, int N, int row, int col) {
-
-        for (int i = row; i < row + N; i++) {
-            for (int j = col; j < col + N; j++) {
-                if (arr[i][j] != arr[row][col]) {
-                    return false;
-                }
-            }
+    static int[] colors = new int[2];
+    static int[][] board;
+    static void cut(int x, int y, int size){
+        if(size==1) {
+            colors[board[x][y]]++; return;
         }
-        return true;
-    }
-
-    public static void div(int[][] arr, int N, int row, int col) {
-
-        if (N == 1 || checkColor(arr, N, row, col)) {
-            if (arr[row][col] == 1) {
-                blue++;
-            } else {
-                white++;
-            }
-            return;
+        int sum = 0;
+        for(int i=0;i<size;i++)
+            for(int j=0;j<size;j++)
+                sum+=board[i+x][j+y];
+        if(sum==0) colors[0]++;
+        else if(sum==size*size) colors[1]++;
+        else{
+            size/=2;
+            cut(x,y,size);
+            cut(x+size,y,size);
+            cut(x,y+size,size);
+            cut(x+size,y+size,size);
         }
-
-       N /= 2;
-
-        div(arr, N, row, col);
-        div(arr, N, row, col + N);
-        div(arr, N, row + N, col);
-        div(arr, N, row + N, col + N);
-
     }
-
-    public static void main(String[] args) throws Exception {
-
-        int N = Integer.parseInt(br.readLine());
-        arr = new int[N][N];
-
-        for (int i = 0; i < arr.length; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < arr[0].length; j++) {
-                arr[i][j] = Integer.parseInt(st.nextToken());
-            }
+    public static void main(String args[]) throws Exception {
+        int n = readInt();
+        board = new int[n][n];
+        for(int i=0;i<n;i++)
+            for(int j=0;j<n;j++)
+                board[i][j] = readInt();
+        cut(0,0,n);
+        System.out.println(colors[0]+"\n"+colors[1]);
+    }
+    
+    static int readInt() throws IOException {
+        int n = 0;
+        int input;
+        while((input = System.in.read()) <= 32);
+        while (true) {
+            if (input>47 && input<58)
+                n = (n<<3) + (n<<1) + (input&15);
+            else return n;
+            input = System.in.read();
         }
-
-        div(arr, N, 0, 0);
-        System.out.println(white);
-        System.out.println(blue);
-
-        br.close();
     }
-
 }
