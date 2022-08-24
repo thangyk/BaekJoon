@@ -1,42 +1,58 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.util.*;
+import java.io.*;
 
 public class Main {
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static int[] arr;
-    static int N, k;
+    static void mergeSort(int[] inputData, int n){
+        for(int i = 0; i < inputData.length; i += n){
+            int[] a = new int[n/2];
+            int[] b = new int[n/2];
 
-    public static void main(String[] args) throws Exception {
+            for(int j = i; j < i + n/2; j++){
+                a[j-i] = inputData[j];
+            }
+            for(int j = i + n/2; j < i + n; j++){
+                b[j-(i+n/2)] = inputData[j];
+            }
 
-        N = Integer.parseInt(br.readLine());
-        arr = new int[N];
+            int aIdx = 0;
+            int bIdx = 0;
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < N; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
+            for(int j = i; j < i + n; j++){
+                if(aIdx >= n/2){
+                    inputData[j] = b[bIdx++];
+                }else if(bIdx >= n/2){
+                    inputData[j] = a[aIdx++];
+                }
+                else if(a[aIdx] < b[bIdx]){
+                    inputData[j] = a[aIdx++];
+                }else{
+                    inputData[j] = b[bIdx++];
+                }
+            }
         }
-
-        k = Integer.parseInt(br.readLine());
-
-        div(arr, 0, 0);
-        for (int item : arr) {
-            System.out.print(item + " ");
-        }
-
-        br.close();
     }
-
-    public static void div(int[] arr, int n, int size) {
-
-        size = arr.length / k;
-
-        for (int i = 0; i < k; i++) {
-            Arrays.sort(arr, n, n + size);
-            n += size;
+    public static void main(String[] args) throws IOException {
+        BufferedReader re = new BufferedReader(new InputStreamReader(System.in));
+        
+        int n = Integer.parseInt(re.readLine());
+        
+        int[] inputData = new int[n];
+        
+        StringTokenizer token = new StringTokenizer(re.readLine());
+        for(int i = 0; i < n; i++){
+            inputData[i] = Integer.parseInt(token.nextToken());
         }
 
-    }
+        int m = Integer.parseInt(re.readLine());
+        for(int i = n / 2; i >= m; i /= 2){
+            mergeSort(inputData, n/i);
+        }
 
+        StringBuilder ans = new StringBuilder();
+        for(int i = 0; i < inputData.length; i++){
+            ans.append(inputData[i]).append(' ');
+        }
+        System.out.print(ans);
+        re.close();
+    }
 }
