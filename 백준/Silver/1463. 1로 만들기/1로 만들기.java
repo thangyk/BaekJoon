@@ -1,40 +1,33 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    static int[] dp;
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int n = Integer.parseInt(br.readLine());
 
-        dp = new int[n + 1];
+        int[] dp = new int[n + 1];
 
-        bw.write(String.valueOf(cal(n)));
+        dp[1] = 0;
 
-        bw.flush();
-        bw.close();
+        for (int i = 2; i <= n; i++) {
+            dp[i] = dp[i - 1] + 1;
+
+            if (i % 2 == 0) {
+                dp[i] = Math.min(dp[i], dp[i / 2] + 1);
+            }
+
+            if (i % 3 == 0) {
+                dp[i] = Math.min(dp[i], dp[i / 3] + 1);
+            }
+        }
+
+        System.out.println(dp[n]);
+
         br.close();
     }
 
-    public static int cal(int n) {
-        if (n == 1) {
-            return 0;
-        }
-
-        if (dp[n] != 0) return dp[n];
-
-        if (n % 6 == 0) {
-            dp[n] = Math.min(cal(n - 1), Math.min(cal(n / 3), cal(n / 2))) + 1;
-        } else if (n % 3 == 0) {
-            dp[n] = Math.min(cal(n / 3), cal(n - 1)) + 1;
-        } else if (n % 2 == 0) {
-            dp[n] = Math.min(cal(n / 2), cal(n - 1)) + 1;
-        } else {
-            dp[n] = cal(n - 1) + 1;
-        }
-
-        return dp[n];
-    }
 }
