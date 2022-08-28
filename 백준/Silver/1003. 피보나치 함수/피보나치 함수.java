@@ -1,49 +1,35 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-
-    static int n,a,b;
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws IOException {
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
         int t = Integer.parseInt(br.readLine());
+        long dp[] = new long[41];
+
+        dp[1] = 1;
+
+        for (int i = 2; i <= 40; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < t; i++) {
-            n = Integer.parseInt(br.readLine());
-            fib(n);
-            bw.write(a + " " + b + "\n");
-            a = 0;
-            b = 0;
-        }
+            int n = Integer.parseInt(br.readLine());
 
-        bw.flush();
-        bw.close();
-        br.close();
-    }
-
-    public static void fib(int n) {
-
-        int dp = 0;
-        int tmp1 = 0;
-        int tmp2 = 1;
-
-        if (n == 0) {
-            a++;
-        } else if (n == 1) {
-            b++;
-        } else {
-            for (int i = 2; i <= n; i++) {
-                dp = tmp1 + tmp2;
-                tmp1 = tmp2;
-                tmp2 = dp;
+            if (n == 0) {
+                sb.append("1 0\n");
+                continue;
             }
-            a = tmp1;
-            b = tmp2;
+            sb.append(dp[n - 1] + " " + dp[n] + "\n");
         }
 
+        System.out.println(sb);
 
+        br.close();
     }
 
 }
