@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
@@ -44,7 +42,7 @@ public class Main {
 
         int[] dist = new int[V + 1];
 
-        for (int i = 0; i < V + 1; i++) {
+        for (int i = 0; i < dist.length; i++) {
             dist[i] = Integer.MAX_VALUE;
         }
         dist[start] = 0;
@@ -69,17 +67,18 @@ public class Main {
             }
         }
 
-        StringBuilder sb = new StringBuilder();
-        for (int i = 1; i <= V; i++) {
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        for (int i = 1; i < V + 1; i++) {
             if (dist[i] == Integer.MAX_VALUE) {
-                sb.append("INF\n");
+                bw.write("INF\n");
             } else {
-                sb.append(dist[i] + "\n");
+                bw.write(dist[i] + "\n");
             }
         }
 
-        System.out.println(sb);
-
+        bw.flush();
+        bw.close();
         br.close();
     }
 }
