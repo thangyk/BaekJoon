@@ -5,40 +5,32 @@ import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int n = Integer.parseInt(br.readLine());
 
+        Stack<Character> stack = new Stack<>();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < n; i++) {
-            Stack stack = new Stack();
-            String str = br.readLine();
-
-            boolean isPair = true;
-
-            for (String s : str.split("")) {
-                if (s.equals("(")) {
-                    stack.push(s);
+            String input = br.readLine();
+            stack.clear();
+            for (int j = 0; j < input.length(); j++) {
+                if (stack.isEmpty()) {
+                    stack.add(input.charAt(j));
+                } else if (stack.peek() == '(' && input.charAt(j) == ')') {
+                    stack.pop();
                 } else {
-                    if (stack.isEmpty()) {
-                        isPair = false;
-                        break;
-                    } else {
-                        stack.pop();
-                    }
+                    stack.add(input.charAt(j));
                 }
             }
-
-            if (stack.isEmpty() && isPair) {
-                System.out.println("YES");
+            if (stack.isEmpty()) {
+                sb.append("YES").append("\n");
             } else {
-                System.out.println("NO");
+                sb.append("NO").append("\n");
             }
         }
 
-
+        System.out.println(sb);
         br.close();
-
-
     }
 }
