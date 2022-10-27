@@ -1,79 +1,46 @@
-import java.io.*;
-import java.util.Deque;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
-
-    public static int checkPop(Deque queue) {
-        if (queue.isEmpty()) {
-            return -1;
-        }
-
-        return (int) queue.remove();
-    }
-
-    public static int checkEmpty(Deque queue) {
-        if (queue.isEmpty()) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-
-    public static int printFront(Deque queue) {
-        if (queue.isEmpty()) {
-            return -1;
-        } else {
-            return queue.peekFirst().hashCode();
-        }
-    }
-
-    public static int printBack(Deque queue) {
-        if (queue.isEmpty()) {
-            return -1;
-        } else {
-            return queue.peekLast().hashCode();
-        }
-    }
-
     public static void main(String[] args) throws IOException {
-        Deque queue = new LinkedList();
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int n = Integer.parseInt(br.readLine());
 
+        Queue<Integer> queue = new LinkedList<>();
+        StringBuilder sb = new StringBuilder();
+        int num = 0;
         for (int i = 0; i < n; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-
-            switch (st.nextToken()) {
+            String input = st.nextToken();
+            switch (input) {
                 case "push":
-                    queue.add(Integer.parseInt(st.nextToken()));
+                    num = Integer.parseInt(st.nextToken());
+                    queue.offer(num);
                     break;
                 case "pop":
-                    bw.write(checkPop(queue) + "\n");
+                    sb.append(queue.isEmpty() ? -1 : queue.remove()).append('\n');
                     break;
                 case "size":
-                    bw.write(queue.size() + "\n");
+                    sb.append(queue.size()).append('\n');
                     break;
                 case "empty":
-                    bw.write(checkEmpty(queue) + "\n");
+                    sb.append(queue.isEmpty() ? 1 : 0).append('\n');
                     break;
                 case "front":
-                    bw.write(printFront(queue) + "\n");
+                    sb.append(queue.isEmpty() ? -1 : queue.peek()).append('\n');
                     break;
                 case "back":
-                    bw.write(printBack(queue) + "\n");
+                    sb.append(queue.isEmpty() ? -1 : num).append('\n');
                     break;
             }
         }
+        System.out.println(sb);
 
-
-        bw.flush();
         br.close();
-        bw.close();
-
     }
 }
