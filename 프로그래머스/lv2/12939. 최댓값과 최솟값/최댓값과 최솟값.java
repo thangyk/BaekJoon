@@ -10,7 +10,7 @@ class Solution {
         }
         list.sort((o1, o2) -> o1 - o2);
 
-        String result = list.get(0) + " " + list.get(list.size() - 1);
-        return result;
+        return list.get(0) + " " + list.get(list.size() - 1);
+        
     }
 }
