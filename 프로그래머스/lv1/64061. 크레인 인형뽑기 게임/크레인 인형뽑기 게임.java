@@ -18,19 +18,17 @@ class Solution {
                     stack.push(n);
                     board[j][idx] = 0;
                     break;
-                } else {
-                    if (stack.peek() == n) {
-                        stack.pop();
-                        board[j][idx] = 0;
-                        cnt += 2;
-                    } else {
-                        if (n != 0) {
-                            stack.push(n);
-                            board[j][idx] = 0;
-                        }
-                    }
-                    break;
                 }
+
+                if (stack.peek() == n) {
+                    stack.pop();
+                    board[j][idx] = 0;
+                    cnt += 2;
+                } else {
+                    stack.push(n);
+                    board[j][idx] = 0;
+                }
+                break;
             }
         }
 
