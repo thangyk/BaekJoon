@@ -5,13 +5,12 @@ class Solution {
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
 
-            for (int j = 0; j < index; j++) {
-                do {
-                    c++;
-                    if (c > 'z') {
-                        c -= 26;
-                    }
-                } while (skip.contains(String.valueOf(c)));
+            int cnt = 0;
+            while (cnt < index) {
+                c = (c == 'z' ? 'a' : (char) (c + 1));
+                if (!skip.contains(String.valueOf(c))) {
+                    cnt++;
+                }
             }
 
             if (c > 'z') {
