@@ -3,11 +3,10 @@ class Solution {
         int cnt = 1;
 		int now = section[0] + m;
 		for (int i = 1; i < section.length; i++) {
-			if (now > section[i]) {
-				continue;
+			if (now <= section[i]) {
+				now = section[i] + m;
+				cnt++;
 			}
-			now = section[i] + m;
-			cnt++;
 		}
 
 		return cnt;
