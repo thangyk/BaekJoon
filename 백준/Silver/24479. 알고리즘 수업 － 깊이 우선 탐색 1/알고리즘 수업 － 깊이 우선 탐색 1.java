@@ -43,8 +43,9 @@ public class Main {
 
 		dfs(r);
 		for (int i = 1; i <= n; i++) {
-			System.out.println(check[i]);
+			sb.append(check[i]).append("\n");
 		}
+		System.out.println(sb.toString());
 	}
 
 	private static void dfs(int v) {
@@ -56,5 +57,4 @@ public class Main {
 			}
 		}
 	}
-
 }
