@@ -4,17 +4,21 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
+	static boolean[] visited;
+	static ArrayList<Integer>[] adjList;
+	static StringBuilder sb;
+	static StringTokenizer st;
 
+	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
+		st = new StringTokenizer(br.readLine());
 
 		int n = Integer.parseInt(st.nextToken());
 		int m = Integer.parseInt(st.nextToken());
 		int v = Integer.parseInt(st.nextToken());
 
-		boolean[] visited = new boolean[n + 1];
-		ArrayList<Integer>[] adjList = new ArrayList[n + 1];
+		visited = new boolean[n + 1];
+		adjList = new ArrayList[n + 1];
 
 		for (int i = 1; i <= n; i++) {
 			adjList[i] = new ArrayList<>();
@@ -28,35 +32,37 @@ public class Main {
 			adjList[e].add(s);
 		}
 
-		for (int i = 1; i < adjList.length; i++) {
+		for (int i = 1; i <= n; i++) {
 			Collections.sort(adjList[i]);
 		}
 
-		dfs(v, visited, adjList);
-		System.out.println();
-		Arrays.fill(visited, false);
-		bfs(v, visited, adjList);
+		sb = new StringBuilder();
+		dfs(v);
+		System.out.println(sb.toString());
+		sb = new StringBuilder();
+		visited = new boolean[n + 1];
+		bfs(v);
+		System.out.println(sb.toString());
 	}
 
-	private static void dfs(int v, boolean[] visited, ArrayList<Integer>[] adjList) {
-		System.out.print(v + " ");
+	private static void dfs(int v) {
 		visited[v] = true;
-
+		sb.append(v).append(" ");
 		for (int i : adjList[v]) {
 			if (!visited[i]) {
-				dfs(i, visited, adjList);
+				dfs(i);
 			}
 		}
 	}
 
-	private static void bfs(int v, boolean[] visited, ArrayList<Integer>[] adjList) {
+	private static void bfs(int v) {
 		Queue<Integer> queue = new LinkedList<>();
 		queue.add(v);
 		visited[v] = true;
 
 		while (!queue.isEmpty()) {
 			int nowV = queue.poll();
-			System.out.print(nowV + " ");
+			sb.append(nowV).append(" ");
 			for (int i : adjList[nowV]) {
 				if (!visited[i]) {
 					queue.add(i);
