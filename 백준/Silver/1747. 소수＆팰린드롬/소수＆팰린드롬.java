@@ -8,11 +8,12 @@ public class Main {
 
 		int n = Integer.parseInt(br.readLine());
 
-		for (int i = n; i <= 1003001; i++) {
-			if (isPalindrome(i) && isPrime(i)) {
-				System.out.println(i);
+		while (true) {
+			if (isPalindrome(n) && isPrime(n)) {
+				System.out.println(n);
 				break;
 			}
+			n++;
 		}
 	}
 	public static boolean isPrime(int n) {
