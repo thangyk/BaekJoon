@@ -11,8 +11,8 @@ public class Main {
 		int n = Integer.parseInt(br.readLine());
 		char[] arr = br.readLine().toCharArray();
 
-		int r = 31;
-		int m = 1_234_567_891;
+		final int r = 31;
+		final int m = 1_234_567_891;
 
 		Map<Character, Integer> map = new HashMap<>();
 		char c = 'a';
@@ -20,9 +20,9 @@ public class Main {
 			map.put(c++, i);
 		}
 
-		int result = 0;
+		long result = 0;
 		for (int i = 0; i < n; i++) {
-			result += map.get(arr[i]) * Math.pow(r, i);
+			result += map.get(arr[i]) * Math.pow(r, i) % m;
 		}
 
 		System.out.println(result % m);
