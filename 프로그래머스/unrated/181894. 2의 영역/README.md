@@ -1,10 +1,10 @@
 # [level unrated] 2의 영역 - 181894 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181894) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181894#) 
 
 ### 성능 요약
 
-메모리: 90.8 MB, 시간: 1.74 ms
+메모리: 111 MB, 시간: 2.02 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2023년 12월 1일 5:20:31
+2023년 12월 1일 5:24:43
 
 ### 문제 설명
 

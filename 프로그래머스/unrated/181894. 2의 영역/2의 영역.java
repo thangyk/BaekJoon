@@ -21,10 +21,7 @@ class Solution {
         }
         
         int[] answer = new int[e - s + 1];
-        int idx = 0;
-        for(int i = s; i <= e; i++) {
-            answer[idx++] = arr[i];
-        }
+        System.arraycopy(arr, s, answer, 0, e - s + 1);
 
         return answer;
     }
