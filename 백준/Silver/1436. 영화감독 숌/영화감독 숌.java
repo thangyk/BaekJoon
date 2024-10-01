@@ -7,18 +7,20 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		int n = Integer.parseInt(br.readLine());
-		int num = 666;
 		int cnt = 1;
-		String end = "666";
+		int tmp = 666;
+		final String six = "666";
 
-		while (cnt < n) {
-			num++;
+		while (true) {
+			if (n == cnt) {
+				System.out.println(tmp);
+				return;
+			}
+			tmp++;
 
-			if (String.valueOf(num).contains(end)) {
+			if (String.valueOf(tmp).contains(six)) {
 				cnt++;
 			}
 		}
-
-		System.out.println(num);
 	}
 }
