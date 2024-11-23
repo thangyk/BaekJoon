@@ -1,9 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
@@ -19,45 +17,29 @@ public class Main {
 			int m = Integer.parseInt(st.nextToken());
 
 			Queue<int[]> queue = new LinkedList<>();
+			PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 
 			st = new StringTokenizer(br.readLine());
 			for (int j = 0; j < n; j++) {
 				int num = Integer.parseInt(st.nextToken());
 				queue.add(new int[]{j, num});
-			}
-
-			if (n < 2) {
-				sb.append(1).append("\n");
-				continue;
+				pq.add(num);
 			}
 
 			int cnt = 0;
-			while (true) {
+			while (!queue.isEmpty()) {
 				int[] cur = queue.poll();
-				int max = cur[1];
-				int size = queue.size();
-
-				for (int j = 0; j < size; j++) {
-					int[] tmp = queue.poll();
-					if (max < tmp[1]) {
-						max = tmp[1];
+				if (cur[1] == pq.peek()) {
+					cnt++;
+					pq.poll();
+					if (cur[0] == m) {
+						System.out.println(cnt);
+						break;
 					}
-					queue.add(tmp);
-				}
-
-				if (cur[0] == m && cur[1] == max) {
-					cnt++;
-					break;
-				} else if (cur[1] == max) {
-					cnt++;
 				} else {
 					queue.add(cur);
 				}
 			}
-
-			sb.append(cnt).append("\n");
 		}
-		
-		System.out.println(sb);
 	}
 }
